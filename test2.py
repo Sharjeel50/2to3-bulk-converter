@@ -1,7 +1,7 @@
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 try:
-    x = urllib2.urlopen("dsadsa").read()
-    print x
-except Exception, e:
-    print str(e)
+    x = urllib.request.urlopen("dsadsa").read()
+    print(x)
+except Exception as e:
+    print(str(e))
