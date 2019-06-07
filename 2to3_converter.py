@@ -7,11 +7,11 @@ from subprocess import Popen, PIPE
 class bulk_2to3_converter:
     def __init__(self, master):
         self.master = master
-        self.master.geometry("860x450") 
+        self.master.geometry("600x350") 
         self.ListBox = tk.Listbox(self.master, width=70, height=15)
-        self.ListBox.grid(row = 2, column = 2)
-        self.Convert = tk.Button(self.master, text="Convert", command=self.ConvertFiles).grid(row = 1, column = 3)
-        self.Files = tk.Button(self.master, text="Files", command=self.FindFiles).grid(row = 2, column = 3)
+        self.ListBox.pack()
+        self.Convert = tk.Button(self.master, text="Convert", command=self.ConvertFiles).pack()
+        self.Files = tk.Button(self.master, text="Files", command=self.FindFiles).pack()
         
         self.Path_2to3 = sys.executable[:-11] + "Scripts"
 
@@ -20,7 +20,7 @@ class bulk_2to3_converter:
             cmdCommand = '''cd "{}" && 2to3.exe -w "{}"'''.format(self.Path_2to3, data)
             print(cmdCommand)
             process = subprocess.Popen(
-                cmdCommand.split(), stdout=subprocess.PIPE, shell=True)
+                cmdCommand, stderr=subprocess.PIPE, stdout=subprocess.PIPE, shell=True)
             output, error = process.communicate()
             print(output, error)
 
@@ -33,7 +33,7 @@ def main():
     root = tk.Tk()
     a = bulk_2to3_converter(root)
     root.mainloop()
-
+    
 
 if __name__ == '__main__':
     main()
